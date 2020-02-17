@@ -328,7 +328,7 @@ module.exports = {
         `,
         onStream: async row => {
           try {
-            const toc = await TotalOrdenesCompra(segmento, `${row.code}-%`);
+            const toc = await TotalOrdenesCompra(segmento, `${code}-%`);
             row.ordenesCompra = toc.total;
             row.pagado = toc.pagado;
             row.presupuesto = await PresupuestoCuenta(
