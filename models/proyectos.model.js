@@ -308,7 +308,7 @@ module.exports = {
           row.presupuesto = await PresupuestoCuenta(segmento, row.id);
           const toc = await TotalOrdenesCompra(segmento, `${row.code}-%`);
           row.ordenesCompra = toc.total;
-          row.Pagado = toc.pagado;
+          row.pagado = toc.pagado;
           cuentas.push(row);
         },
         onEnd: () => resolve(cuentas),
