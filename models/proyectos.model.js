@@ -295,14 +295,14 @@ module.exports = {
       });
     });
   },
-  Cuentas(projectId, projectCode) {
+  Cuentas(segmento) {
     return new Promise(function(resolve, reject) {
       const cuentas = [];
       mysql_stream({
         db: "seisaproyectos",
         query: "select * from cuentas",
         onStream: async row => {
-          row.presupuesto = await PresupuestoCuenta(projectCode, row.id);
+          row.presupuesto = await PresupuestoCuenta(segmento, row.id);
           row.ordenesCompra = await TotalOrdenesCompra(
             projectCode,
             `${row.code}-%`

@@ -19,8 +19,8 @@ router.get("/lista", async function(_, res) {
 
 router.get("/cuentas", async function(req, res) {
   try {
-    const { projectCode, projectId } = req.query;
-    const data = await model.Cuentas(projectId, projectCode);
+    const { projectCode } = req.query;
+    const data = await model.Cuentas(projectCode);
     res.json({
       error: false,
       data
@@ -153,7 +153,7 @@ router.get("/estado-cuentas", async function(req, res) {
 router.get("/reporte/:name", function(req, res) {
   const { name } = req.params;
   const path = require("path");
-  res.sendFile(path.join(__dirname, `../temp/${name}.xlsx`))
-})
+  res.sendFile(path.join(__dirname, `../temp/${name}.xlsx`));
+});
 
 module.exports = router;
