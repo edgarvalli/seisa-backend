@@ -367,7 +367,7 @@ module.exports = {
             otros ? "not like" : "like"
           } '${cuenta}%' or mov.CTEXTOEXTRA3 ${
         otros ? "not like" : "like"
-      } '${cuenta}SP%');
+      } '${cuenta}%');
       `;
 
       const data = [];
@@ -375,7 +375,10 @@ module.exports = {
       mssql_stream({
         db,
         query,
-        onStream: async row => data.push(row),
+        async onStream(row) {
+          row.Pagado = await helper.PagosOrdenesCompra(db, row.Id);
+          data.push(row);
+        },
         onDone: () => resolve(data),
         onError: error => reject(error)
       });

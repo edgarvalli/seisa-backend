@@ -41,6 +41,7 @@ function PagosOrdenesCompra(db, id) {
   });
 }
 module.exports = {
+  PagosOrdenesCompra,
   ObtenerOrdenesDeCompraReporte: function(data = [], params = {}) {
     return new Promise(function(resolve, reject) {
       const index = data.length;
