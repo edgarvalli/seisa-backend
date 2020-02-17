@@ -300,7 +300,7 @@ module.exports = {
       const cuentas = [];
       mysql_stream({
         db: "seisaproyectos",
-        query: "select * from accounts",
+        query: "select * from cuentas",
         onStream: async row => {
           row.presupuesto = await PresupuestoCuenta(projectCode, row.id);
           row.ordenesCompra = await TotalOrdenesCompra(
