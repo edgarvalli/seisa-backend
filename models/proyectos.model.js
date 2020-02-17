@@ -59,7 +59,7 @@ function TotalOrdenesCompra(segmento, cuenta) {
       onStream: async row => {
         total += row.Total;
       },
-      onDone: () => resolve(total),
+      onDone: () => resolve({ total }),
       onError: error => reject(error)
     });
   });
@@ -303,10 +303,8 @@ module.exports = {
         query: "select * from cuentas",
         onStream: async row => {
           row.presupuesto = await PresupuestoCuenta(segmento, row.id);
-          row.ordenesCompra = await TotalOrdenesCompra(
-            segmento,
-            `${row.code}-%`
-          );
+          const toc = await TotalOrdenesCompra(segmento, `${row.code}-%`);
+          row.ordenesCompra = toc.total;
           cuentas.push(row);
         },
         onEnd: () => resolve(cuentas),
