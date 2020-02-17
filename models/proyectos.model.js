@@ -51,7 +51,7 @@ function TotalOrdenesCompra(segmento, cuenta) {
         inner join admProductos prod on prod.CIDPRODUCTO = mov.CIDPRODUCTO
         inner join admDocumentos doc on mov.CIDDOCUMENTO= doc.CIDDOCUMENTO
         inner join admTiposCambio tp on tp.CIDMONEDA=2 and tp.CFECHA=mov.CFECHA
-      where mov.CSCMOVTO=${segmento} and prod.CCODIGOPRODUCTO like '${cuenta}' and mov.CIDDOCUMENTODE=17 and doc.CCANCELADO=0;
+      where mov.CSCMOVTO=${segmento} and (prod.CCODIGOPRODUCTO like '${cuenta}%' or  mov.CTEXTOEXTRA3 like '${cuenta}%')  and mov.CIDDOCUMENTODE=17 and doc.CCANCELADO=0;
     `;
     mssql_stream({
       db: "adSEISA",
@@ -79,7 +79,7 @@ function TotalOtros(db, segmento, cuenta) {
         inner join admProductos prod on prod.CIDPRODUCTO = mov.CIDPRODUCTO
         inner join admDocumentos doc on mov.CIDDOCUMENTO= doc.CIDDOCUMENTO
         inner join admTiposCambio tp on tp.CIDMONEDA=2 and tp.CFECHA=mov.CFECHA
-      where mov.CSCMOVTO=${segmento} and prod.CCODIGOPRODUCTO not like '${cuenta}' and mov.CIDDOCUMENTODE=17 and doc.CCANCELADO=0;
+      where mov.CSCMOVTO=${segmento} and (prod.CCODIGOPRODUCTO not like '${cuenta}%' or  mov.CTEXTOEXTRA3 not like '${cuenta}%') and mov.CIDDOCUMENTODE=17 and doc.CCANCELADO=0;
     `;
     mssql_stream({
       db,
