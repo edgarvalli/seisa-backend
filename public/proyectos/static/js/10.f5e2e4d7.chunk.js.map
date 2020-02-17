@@ -1,0 +1,1 @@
+{"version":3,"sources":["views/Categories.jsx"],"names":["Categories"],"mappings":"sHAAA,2BAMeA,UAJf,WACE,OAAO","file":"static/js/10.f5e2e4d7.chunk.js","sourcesContent":["import React from \"react\";\r\n\r\nfunction Categories () {\r\n  return <div>Categorias</div>\r\n}\r\n\r\nexport default Categories;\r\n"],"sourceRoot":""}

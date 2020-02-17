@@ -1,0 +1,2 @@
+(this["webpackJsonpseisa-project"]=this["webpackJsonpseisa-project"]||[]).push([[11],{61:function(e,t,s){"use strict";s.r(t);var n=s(0),a=s.n(n);t.default=function(){return a.a.createElement("div",null,"Home")}}}]);
+//# sourceMappingURL=11.0070367b.chunk.js.map
