@@ -40,8 +40,10 @@ async function PresupuestoCuenta(segmento, id_cuenta_padre, cuenta = "not") {
 function TotalOrdenesCompra(segmento, cuenta) {
   return new Promise(function(resolve, reject) {
     let total = 0;
+    let pagado = 0;
     const query = `
       select
+        mov.CIDMOVIMIENTO as Id,
         CASE
           WHEN doc.CIDMONEDA=1 THEN ROUND(mov.CNETO/tp.CIMPORTE, 2)
           WHEN doc.CIDMONEDA=2 THEN ROUND(mov.CNETO,2)
@@ -57,9 +59,10 @@ function TotalOrdenesCompra(segmento, cuenta) {
       db: "adSEISA",
       query,
       onStream: async row => {
+        pagado += await helper.PagosOrdenesCompra("adSEISA", row.Id);
         total += row.Total;
       },
-      onDone: () => resolve({ total }),
+      onDone: () => resolve({ total, pagado }),
       onError: error => reject(error)
     });
   });
@@ -305,6 +308,7 @@ module.exports = {
           row.presupuesto = await PresupuestoCuenta(segmento, row.id);
           const toc = await TotalOrdenesCompra(segmento, `${row.code}-%`);
           row.ordenesCompra = toc.total;
+          row.Pagado = toc.pagado;
           cuentas.push(row);
         },
         onEnd: () => resolve(cuentas),
