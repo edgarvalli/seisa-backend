@@ -9,7 +9,7 @@ function MysqlStream({
 }) {
   const request = mysql.createConnection({
     host: "localhost",
-    user: "root",
+    user: "seiadmin",
     password: "p4ssw0rd",
     database: db
   });
