@@ -49,7 +49,7 @@ module.exports = {
              prod.CCODIGOPRODUCTO as Cuenta,
             prod.CNOMBREPRODUCTO as Concepto, mov.COBSERVAMOV as Detalle,
             doc.CSERIEDOCUMENTO as FolioRequisicion, doc.CFECHA as FechaRequisicion,
-            CONCAT(doc.CSERIEDOCUMENTO, ' ', doc.CFOLIO) as Folio,doc.CFECHA as FechaOrdenDeCompra, doc.CFECHAVENCIMIENTO as FechaOrdeDeCompraCompromiso,
+            CONCAT(doc.CSERIEDOCUMENTO, ' ', doc.CFOLIO) as FolioOrdenCompra,doc.CFECHA as FechaOrdenDeCompra, doc.CFECHAVENCIMIENTO as FechaOrdeDeCompraCompromiso,
             CASE
                 WHEN doc.CIDMONEDA=1 THEN ROUND(mov.CNETO/tp.CIMPORTE, 2)
                 WHEN doc.CIDMONEDA=2 THEN ROUND(mov.CNETO,2)
