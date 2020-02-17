@@ -304,7 +304,7 @@ module.exports = {
         onStream: async row => {
           row.presupuesto = await PresupuestoCuenta(segmento, row.id);
           row.ordenesCompra = await TotalOrdenesCompra(
-            projectCode,
+            segmento,
             `${row.code}-%`
           );
           cuentas.push(row);
